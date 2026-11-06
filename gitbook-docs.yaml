@@ -5,8 +5,8 @@ site:
   structure:
     - type: space
       key: ai-agent-book
-      title: AI Agent 从原理到实践
-      path: /
+      title: AI Agent 从原理到实践：构建能自主完成任务的智能体
+      path: ai-agent
       default: true
       content:
         directory: ./
