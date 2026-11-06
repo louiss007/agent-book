@@ -654,6 +654,17 @@ print(trajectory.final_answer)
 print(trajectory.stop_reason, trajectory.usage.total_tokens)
 ```
 
+第 12 章增加统一装配入口，把上述手工步骤固定下来：
+
+```python
+from atlas import AtlasConfig, build_app
+
+app = build_app(AtlasConfig.from_env())
+trajectory = app.run("比较 ReAct 与 Plan-and-Execute 的适用场景")
+```
+
+`build_app` 不改变任何底层接口，只是按固定顺序组合工具、模型、记忆、检索、上下文预算与包装器；`AtlasApp.run` 仍然返回 `Trajectory`。
+
 ## 错误与终止语义
 
 | 情况 | 运行时行为 | `stop_reason` |
@@ -700,12 +711,12 @@ print(trajectory.stop_reason, trajectory.usage.total_tokens)
 | v0.9.0 | 9 | `ContextBuilder` 增加预算、压缩与渐进式披露实现 | 向后兼容 |
 | v0.10.0 | 10 | 新增 `Orchestrator` 与角色 Agent | 向后兼容 |
 | v0.11.0 | 11 | 新增框架适配器，内核不变 | 向后兼容 |
-| v1.0.0 | 12 | CLI 整合，公开接口冻结 | 稳定 |
+| v1.0.0 | 12 | 新增 `AtlasConfig`、`AtlasApp`、`build_app` 与 CLI；公开接口冻结 | 稳定 |
 | v1.1.0 | 15 | 新增评测类型与运行器 | 向后兼容 |
 | v1.2.0 | 16 | 新增 `Tracer`、JSONL 记录与回放 | 向后兼容 |
 | v1.3.0 | 17 | 新增 `Guard`、`GuardDecision`、`ApprovalHandler` | 向后兼容 |
-| v1.4.0 | 18 | 新增 `runtime` 层：工作进程、缓存、重试 | 向后兼容 |
+| v1.4.0 | 18 | 新增 `runtime` 层：`CachedLLM`、`RoutingLLM`、`RetryingLLM`、`IdempotentTool`、`TokenBucket`、`JobRunner`、`RuntimeMetrics` 等协议包装器 | 向后兼容 |
 
 {% hint style="info" %}
-第 13、14 章不新增接口；第 19–21 章不修改代码。若后续写作中发现必须改动某个冻结接口，会在本页单独记录"破坏性变更"及迁移方式，而不是悄悄改掉。
+第 13、14 章不新增接口；第 19、21 章不修改代码；第 20 章若新增训练示例，只作为外层示例，不改冻结接口。若后续写作中发现必须改动某个冻结接口，会在本页单独记录"破坏性变更"及迁移方式，而不是悄悄改掉。
 {% endhint %}
