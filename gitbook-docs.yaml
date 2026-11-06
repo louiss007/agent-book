@@ -1,0 +1,13 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+version: 1
+site:
+  title: AI Agent 从原理到实践
+  structure:
+    - type: space
+      key: ai-agent-book
+      title: AI Agent 从原理到实践
+      path: /
+      default: true
+      content:
+        directory: ./
+        language: zh
