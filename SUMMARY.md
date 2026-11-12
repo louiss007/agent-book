@@ -1,7 +1,5 @@
 # 目录
 
-## 前言
-
 * [本书简介](README.md)
 * [前言：为什么现在写 Agent](preface.md)
 
